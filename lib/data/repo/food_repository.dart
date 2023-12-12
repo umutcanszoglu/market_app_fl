@@ -6,7 +6,7 @@ import 'package:bootcamp_final/data/entity/foods.dart';
 import 'package:bootcamp_final/data/entity/foods_response.dart';
 import 'package:dio/dio.dart';
 
-class TestRepository {
+class FoodRepository {
   List<Foods> parseFoodResponse(String response) {
     return FoodResponse.fromJson(json.decode(response)).foods;
   }

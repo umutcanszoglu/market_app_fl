@@ -1,6 +1,7 @@
 import 'package:bootcamp_final/data/entity/carts.dart';
 import 'package:bootcamp_final/data/helper/helper.dart';
 import 'package:bootcamp_final/ui/cubit/cart_page_cubit.dart';
+import 'package:bootcamp_final/ui/views/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -157,8 +158,9 @@ class _CartPageState extends State<CartPage> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        const SizedBox(width: 32),
                         const Text(
                           "Total price:",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -169,6 +171,27 @@ class _CartPageState extends State<CartPage> {
                           style: const TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold, color: Colors.redAccent),
                         ),
+                        const Spacer(),
+                        CircleAvatar(
+                          backgroundColor: Colors.redAccent,
+                          child: IconButton(
+                            onPressed: () {
+                              Get.to(const BottomNavigationPage());
+                              for (var cart in aggregate) {
+                                context.read<CartPageCubit>().deleteCart(cart.name, cart.username);
+                              }
+                              Get.snackbar("Order Status", "Success",
+                                  backgroundColor: Colors.green,
+                                  colorText: Colors.white,
+                                  duration: const Duration(seconds: 1));
+                            },
+                            icon: const Icon(
+                              Icons.done_all,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
                       ],
                     ),
                   ),
